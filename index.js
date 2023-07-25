@@ -3,20 +3,20 @@ import jwt from "jsonwebtoken";
 import { jwtSecret } from './config.js';
 import * as authController from './controllers/authentication.js';
 import cors from 'cors'
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const app = express();
-
-app.use(cors({
-    origin: 'https://taks4f.vercel.app',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: 'include',
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-}));
-
+// app.use(cors());
+app.use(
+    cors({
+        origin: 'https://taks4f.vercel.app',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: 'include',
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+    })
+);
 app.use(express.json());
-
 app.use(
     '/api',
     createProxyMiddleware({
@@ -27,6 +27,7 @@ app.use(
         },
     })
 );
+
 
 const checkJwt = (req, res, next) => {
     const token = req.headers['x-access-token'];
