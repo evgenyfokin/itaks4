@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import { db } from '../config.js';
 
-const dbUrl = process.env.CLEARDB_DATABASE_URL
+const dbUrl = 'mysql://b06a25ef11eebc:b892f323@us-cdbr-east-06.cleardb.net/heroku_27bd5cee3560c30?reconnect=true'
 const [ , , username, password, host, database] = dbUrl.match(/mysql:\/\/(.*?):(.*?)@(.*?):3306\/(.*)/);
 const sequelize = new Sequelize(database, username, password, {
     host: host,
