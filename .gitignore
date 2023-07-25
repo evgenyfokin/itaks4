@@ -5,7 +5,6 @@ yarn.lock
 *.log
 coverage/
 dist/
-*.js
 *.tsbuildinfo
 lib/
 .cache/
