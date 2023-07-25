@@ -1,8 +1,13 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import { db } from '../config.js';
 
 const dbUrl = 'mysql://b06a25ef11eebc:b892f323@us-cdbr-east-06.cleardb.net/heroku_27bd5cee3560c30?reconnect=true'
-const [ , , username, password, host, database] = dbUrl.match(/mysql:\/\/(.*?):(.*?)@(.*?)\/(.*?)\?reconnect=true/);
+const parsedUrl = new URL(dbUrl);
+
+const username = parsedUrl.username;
+const password = parsedUrl.password;
+const host = parsedUrl.hostname;
+const database = parsedUrl.pathname.slice(1); // Удаляем начальный '/'
+
 const sequelize = new Sequelize(database, username, password, {
     host: host,
     dialect: 'mysql'
