@@ -1,8 +1,10 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import { db } from '../config.js';
 
-const sequelize = new Sequelize(db.database, db.user, db.password, {
-    host: db.host,
+const dbUrl = process.env.CLEARDB_DATABASE_URL
+const [ , , username, password, host, database] = dbUrl.match(/mysql:\/\/(.*?):(.*?)@(.*?):3306\/(.*)/);
+const sequelize = new Sequelize(database, username, password, {
+    host: host,
     dialect: 'mysql'
 });
 
